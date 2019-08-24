@@ -1,4 +1,3 @@
-from rest_framework.generics import RetrieveAPIView
 from django.http import JsonResponse, HttpResponse
 from licenses.models import car,driver
 from Auth.models import Account

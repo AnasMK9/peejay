@@ -20,6 +20,7 @@ from licenses import urls
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^Auth/signup', views.signup),
-    url(r'^licenses/', include('licenses.urls') )
+    url(r'^licenses/', include('licenses.urls') ),
+    url(r'^req/', include('req.urls'))
 ]
 

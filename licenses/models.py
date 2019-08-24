@@ -23,6 +23,7 @@ class car(models.Model):
     insuranceC = models.CharField(max_length=15)
     insuranceP = models.IntegerField(validators=[MinValueValidator(10000000), MaxValueValidator(99999999)], unique=True)
     renew = models.BooleanField(default=False)
+    tickets = models.FloatField(default=0.0)
     objects = models.Manager()
     
 
@@ -31,8 +32,8 @@ class car(models.Model):
 
 class driver(models.Model):
     fullname = models.CharField(max_length=50)
-    NID = models.IntegerField(validators=[MinValueValidator(1000000000, MaxValueValidator(9999999999))], primary_key=True) #National ID
-    licenseNo = models.IntegerField(validators=[MinValueValidator(10000000), MaxValueValidator(99999999)], default= random.randint(30000000,80000000))
+    NID = models.IntegerField(validators=[MinValueValidator(1000000000, MaxValueValidator(9999999999))], ) #National ID
+    licenseNo = models.IntegerField(validators=[MinValueValidator(10000000), MaxValueValidator(99999999)], default= random.randint(30000000,80000000), primary_key=True)
     issueDate = models.DateField(date(random.randint(2006,2016), random.randint(1,12), random.randint(1,28)))
     expDate = models.DateField(default = date(random.randint(2015,2019), random.randint(9,12), random.randint(1,28)))
     center = models.CharField(max_length = 10, default='مركز ترخيص')

@@ -41,6 +41,8 @@ class allReqs(models.Model):
     active = models.BooleanField(default=False)
     expDate = models.DateTimeField(default = now)
     reqtype = models.IntegerField()
+    objects = models.Manager()
+
 
 
 class req1(models.Model):
@@ -54,4 +56,82 @@ class req1(models.Model):
     active = models.BooleanField(default=False)
     expDate = models.DateTimeField(default = now)
     reqtype = models.IntegerField()
+    objects = models.Manager()
 
+class req2(models.Model):
+    req_id = models.CharField(max_length=10)
+    NID = models.CharField( max_length=10)
+    lNo = models.IntegerField()
+    complete = models.BooleanField(default=False)
+    paid = models.BooleanField(default=False)
+    price = models.IntegerField()
+    active = models.BooleanField(default=False)
+    expDate = models.DateTimeField()
+    reqtype = models.IntegerField()
+    delivery = models.CharField(max_length = 30)
+    address = models.CharField(max_length = 30)
+    objects = models.Manager()
+
+
+class req3(models.Model):
+    req_id = models.CharField(max_length=10)
+    NID = models.CharField( max_length=10)
+    lNo = models.IntegerField()
+    complete = models.BooleanField(default=False)
+    paid = models.BooleanField(default=False)
+    price = models.IntegerField()
+    active = models.BooleanField(default=False)
+    expDate = models.DateTimeField()
+    reqtype = models.IntegerField()
+    delivery = models.CharField(max_length = 30)
+    address = models.CharField(max_length = 30)
+    objects = models.Manager()
+
+
+class req4(models.Model):
+    req_id = models.CharField(max_length=10)
+    NID = models.CharField( max_length=10)
+    lNo = models.IntegerField()
+    complete = models.BooleanField(default=False)
+    paid = models.BooleanField(default=False)
+    price = models.IntegerField()
+    active = models.BooleanField(default=False)
+    expDate = models.DateTimeField()
+    reqtype = models.IntegerField()
+    delivery = models.CharField(max_length = 30)
+    address = models.CharField(max_length = 30)
+    objects = models.Manager()
+
+
+class req5(models.Model):
+    req_id = models.CharField(max_length=10)
+    NID = models.CharField( max_length=10)
+    tarmeez = models.IntegerField()
+    carNo = models.IntegerField()
+    regNo = models.IntegerField()
+    complete = models.BooleanField(default=False)
+    paid = models.BooleanField(default=False)
+    price = models.IntegerField()
+    active = models.BooleanField(default=False)
+    expDate = models.DateTimeField()
+    reqtype = models.IntegerField()
+    delivery = models.CharField(max_length = 30)
+    address = models.CharField(max_length = 30)
+    objects = models.Manager()
+
+
+class req6(models.Model):
+    req_id = models.CharField(max_length=10)
+    NID = models.CharField( max_length=10)
+    tarmeez = models.IntegerField()
+    carNo = models.IntegerField()
+    regNo = models.IntegerField()
+    complete = models.BooleanField(default=False)
+    paid = models.BooleanField(default=False)
+    price = models.IntegerField()
+    active = models.BooleanField(default=False)
+    expDate = models.DateTimeField()
+    reqtype = models.IntegerField()
+    delivery = models.CharField(max_length = 30)
+    address = models.CharField(max_length = 30)
+    objects = models.Manager()

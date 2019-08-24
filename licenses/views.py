@@ -23,7 +23,7 @@ def getCar(request, tarmeez, carNo, regNo):
         serializer = carSerializer(final, many=True)
         return JsonResponse(serializer.data, safe=False)
     else:
-        if random.choice([True,False]):
+        if tarmeez > 10:
             
             if (car.objects.all().filter(tarmeez=tarmeez, Num=carNo).exists()) or (car.objects.all().filter(reg_no=regNo).exists()):
                 return JsonResponse({"error": "Car doesn't Exist"})

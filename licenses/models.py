@@ -23,7 +23,6 @@ class car(models.Model):
     insuranceC = models.CharField(max_length=15)
     insuranceP = models.IntegerField(validators=[MinValueValidator(10000000), MaxValueValidator(99999999)], unique=True)
     renew = models.BooleanField(default=False)
-    tickets = models.FloatField(default=0.0)
     objects = models.Manager()
     
 

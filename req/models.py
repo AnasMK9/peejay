@@ -7,7 +7,7 @@ from django.utils.timezone import now
 class reqT(models.Model):
     request_id = models.CharField(max_length=20, primary_key=True)
     req = models.CharField(max_length=30)
-
+    objects = models.Manager()
     def __str__(self):
         return self.req
 '''
@@ -134,4 +134,38 @@ class req6(models.Model):
     reqtype = models.IntegerField()
     delivery = models.CharField(max_length = 30)
     address = models.CharField(max_length = 30)
+    objects = models.Manager()
+
+
+class req7(models.Model):
+    req_id = models.CharField(max_length=10)
+    NID = models.CharField( max_length=10)
+    tarmeez = models.IntegerField()
+    carNo = models.IntegerField()
+    regNo = models.IntegerField()
+    complete = models.BooleanField(default=False)
+    paid = models.BooleanField(default=False)
+    price = models.IntegerField()
+    active = models.BooleanField(default=False)
+    expDate = models.DateTimeField()
+    reqtype = models.IntegerField()
+    delivery = models.CharField(max_length = 30)
+    address = models.CharField(max_length = 30)
+    objects = models.Manager()
+
+
+class req11(models.Model):
+    req_id = models.CharField(max_length=10)
+    NID = models.CharField( max_length=10)
+    tarmeez = models.IntegerField()
+    NID2 = models.CharField( max_length=10)
+    phone = models.CharField(max_length = 10)
+    carNo = models.IntegerField()
+    regNo = models.IntegerField()
+    complete = models.BooleanField(default=False)
+    paid = models.BooleanField(default=False)
+    price = models.IntegerField()
+    active = models.BooleanField(default=False)
+    expDate = models.DateTimeField()
+    reqtype = models.IntegerField()
     objects = models.Manager()

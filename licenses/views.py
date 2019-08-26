@@ -1,6 +1,5 @@
 from django.http import JsonResponse, HttpResponse
 from licenses.models import car,driver
-from Auth.models import Account
 from datetime import date
 import random
 from licenses.serializers import driverSerializer, carSerializer
@@ -24,11 +23,10 @@ def getCar(request, tarmeez, carNo, regNo):
         return JsonResponse(serializer.data, safe=False)
     else:
         if tarmeez > 10:
-            
             if (car.objects.all().filter(tarmeez=tarmeez, Num=carNo).exists()) or (car.objects.all().filter(reg_no=regNo).exists()):
                 return JsonResponse({"error": "Car doesn't Exist"})
             newcar = car(tarmeez=tarmeez, Num= carNo, reg_no=regNo)
-            newcar.owner = Account.objects.get(pk=request.user.NID).fullname
+            newcar.owner = request.user.fullname
             newcar.cmake = random.choice(['Mitsubishi', 'McLaren','Lexus', 'Bentley' , 'Mazda','Suzuki', 'Subaru', 'Volkswagen', 'Jeep', 'Lamborghini', 'Porsche', 'Toyota', 'Ferrari', 'Mercedes', 'Audi', 'Ford', 'Honda', 'BMW', 'Hyundai', 'KIA'])
             newcar.color = random.choice(['Red', 'Green', 'Yellow', 'Blue', 'range', 'Purple', 'Cyan', 'Magenta', 'Lime', 'Pink', 'Lavender', 'Brown', 'Beige', 'Maroon', 'Mint', 'live', 'Apricot', 'Navy', 'Grey', 'White', 'Black'])
             newcar.yearModel = random.randint(1990,2019)
@@ -65,50 +63,9 @@ def getDriver(request,NID):
         serializer = driverSerializer(final, many=True)
         return JsonResponse(serializer.data, safe=False)
     else:
-        #newD = driver(NID=Account.objects.get(pk=request.user.NID).NID)
-        newD = driver(NID=NID)
-        newD.fullname = Account.objects.get(pk=request.user.NID).fullname
-        newD.licenseNo = random.randint(30000000,80000000)
-        newD.issueDate = date(random.randint(2006,2016), random.randint(1,12), random.randint(1,28))
-        newD.expDate = date(random.randint(2015,2019), random.randint(9,12), random.randint(1,28))
-        newD.center = 'مركز ترخيص'
-        newD.ltype = 32
-        per = newD.expDate - date.today()
-        if (newD.expDate - date.today()).days < 30:
-            newD.renew = True
-        newD.save()
-        final = driver.objects.all().filter(NID=NID)
-        serializer = driverSerializer(final, many=True)
-        return JsonResponse(serializer.data, safe=False)
+
+        return JsonResponse({"Message": "Bad Request"})
     
-    '''
-    else:
-        if random.choice([True,False]):
-            
-            if (car.objects.all().filter(NID=NID, licenseNo=Lno).exists()) or (car.objects.all().filter(reg_no=regNo).exists()):
-                return JsonResponse({"error": "Please enter a valid License Number/National ID"})
-            newcar = car(tarmeez=tarmeez, Num= carNo, reg_no=regNo)
-            newcar.owner = Account.objects.get(pk=request.user.NID).fullname
-            newcar.cmake = random.choice(['Mitsubishi', 'McLaren','Lexus', 'Bentley' , 'Mazda','Suzuki', 'Subaru', 'Volkswagen', 'Jeep', 'Lamborghini', 'Porsche', 'Toyota', 'Ferrari', 'Mercedes', 'Audi', 'Ford', 'Honda', 'BMW', 'Hyundai', 'KIA'])
-            newcar.color = random.choice(['Red', 'Green', 'Yellow', 'Blue', 'range', 'Purple', 'Cyan', 'Magenta', 'Lime', 'Pink', 'Lavender', 'Brown', 'Beige', 'Maroon', 'Mint', 'live', 'Apricot', 'Navy', 'Grey', 'White', 'Black'])
-            newcar.yearModel = random.randint(1990,2019)
-            newcar.chassis =requests.get('http://www.randomvin.com/getvin.php?type=real').text
-            newcar.insuranceP = random.randint(20000000,80000000)
-            newcar.insuranceC = 'Insurance Company'
-            newcar.passengers = random.choice([4,5])
-            newcar.licenseExp = date(random.randint(2018,2023), random.randint(1,12), random.randint(1,28))
-            newcar.use = 'ركوب'
-            newcar.category = random.choice(['ركوب كبير', 'ركوب صغير'])
-            if (newcar.licenseExp - date.today()).days < 30 :
-                newcar.renew = True
-            else:
-                newcar.renew = False
-            newcar.save()
-            final = car.objects.all().filter(reg_no=regNo, tarmeez=tarmeez, Num=carNo)
-            serializer = driverSerializer(final, many=True)
-            return JsonResponse(serializer.data, safe=False)
-        else:
-            return JsonResponse({"error": "Please enter a valid License Number/National ID"})
     
     '''
     

@@ -2,6 +2,9 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import PermissionsMixin
+from licenses.models import driver
+from datetime import date
+from random import randint
 # Create your models here.
 class AccountManager(BaseUserManager):
     def Create_user(self, fullname,NID,phone,email,username,password):
@@ -18,6 +21,16 @@ class AccountManager(BaseUserManager):
         AccountOb.is_staff = False
         AccountOb.is_superuser = False
         AccountOb.is_active = True
+        newD = driver(fullname = fullname, NID = NID)
+        # , expDate = date(randint(2015,2019), randint(9,12), randint(1,28))
+        newD.ltype = 32
+        newD.center = ' مركز ترخيص'
+        newD.licenseNo = randint(10000000,99999999)
+        newD.issueDate = date(randint(2006,2016), randint(1,12), randint(1,28))
+        newD.expDate = date(randint(2015,2019), randint(9,12), randint(1,28))
+        newD.save()
+
+
 
         AccountOb.save(using=self._db)
 

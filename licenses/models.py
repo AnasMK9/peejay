@@ -15,7 +15,7 @@ class car(models.Model):
     category = models.CharField(max_length=10) #fe2at el markaba
     color = models.CharField(max_length = 20)
     yearModel = models.IntegerField(validators=[MaxValueValidator(2019), MinValueValidator(1990)])
-    reg_no = models.IntegerField(validators=[MinValueValidator(1000000000), MaxValueValidator(9999999999)],primary_key=True)
+    reg_no = models.BigIntegerField(validators=[MinValueValidator(1000000000), MaxValueValidator(9999999999)],primary_key=True)
     chassis = models.CharField(max_length=17,unique=True)
     licenseExp = models.DateField()
     passengers = models.IntegerField()
@@ -30,7 +30,7 @@ class car(models.Model):
 
 class driver(models.Model):
     fullname = models.CharField(max_length=50)
-    NID = models.IntegerField(validators=[MinValueValidator(1000000000, MaxValueValidator(9999999999))], ) #National ID
+    NID = models.BigIntegerField(validators=[MinValueValidator(1000000000, MaxValueValidator(9999999999))], ) #National ID
     licenseNo = models.IntegerField(validators=[MinValueValidator(10000000), MaxValueValidator(99999999)], default= random.randint(30000000,80000000), primary_key=True)
     issueDate = models.DateField(date(random.randint(2006,2016), random.randint(1,12), random.randint(1,28)))
     expDate = models.DateField(default = date(random.randint(2015,2019), random.randint(9,12), random.randint(1,28)))

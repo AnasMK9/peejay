@@ -61,7 +61,7 @@ class AccountManager(BaseUserManager):
     
 class Account(AbstractBaseUser,PermissionsMixin):
     fullname = models.CharField(max_length=50)
-    NID = models.IntegerField(validators=[MinValueValidator(1000000000, MaxValueValidator(9999999999))],primary_key=True ) #National ID
+    NID = models.BigIntegerField(validators=[MinValueValidator(1000000000, MaxValueValidator(9999999999))],primary_key=True ) #National ID
     phone = models.CharField(validators=[RegexValidator(regex='^.{10}$', message='Please enter a valid number', code='3')], max_length=10,unique=True)
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=30, unique=True)

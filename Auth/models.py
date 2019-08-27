@@ -64,7 +64,7 @@ class Account(AbstractBaseUser,PermissionsMixin):
     NID = models.IntegerField(validators=[MinValueValidator(1000000000, MaxValueValidator(9999999999))],primary_key=True ) #National ID
     phone = models.CharField(validators=[RegexValidator(regex='^.{10}$', message='Please enter a valid number', code='3')], max_length=10,unique=True)
     email = models.EmailField(unique=True)
-    username = models.CharField(max_length=15, unique=True)
+    username = models.CharField(max_length=30, unique=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
 

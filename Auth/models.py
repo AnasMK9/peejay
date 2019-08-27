@@ -39,7 +39,7 @@ class AccountManager(BaseUserManager):
         return AccountOb
 
 
-    def create_superuser(self, fullname,NID,phone,email,username,password, is_staff):
+    def create_superuser(self, fullname,NID,phone,email,username,password):
         if (not email or not fullname or not NID or not phone or not email or not username or not password):
             raise ValueError('Incomplete registration info')
         AccountOb = self.model(

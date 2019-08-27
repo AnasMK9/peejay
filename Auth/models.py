@@ -2,12 +2,13 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import PermissionsMixin
+from django.core.validators import MinValueValidator,MaxValueValidator
 from licenses.models import driver
 from datetime import date
 from random import randint
 # Create your models here.
 class AccountManager(BaseUserManager):
-    def Create_user(self, fullname,NID,phone,email,username,password):
+    def create_user(self, fullname,NID,phone,email,username,password):
         if (not email or not fullname or not NID or not phone or not email or not username or not password):
             raise ValueError('Incomplete registration info')
         AccountOb = self.model(
@@ -60,13 +61,16 @@ class AccountManager(BaseUserManager):
     
 class Account(AbstractBaseUser,PermissionsMixin):
     fullname = models.CharField(max_length=50)
-    NID = models.CharField(validators=[RegexValidator(regex='^.{10}$', message='Please enter a valid national ID', code='1')],primary_key=True, max_length=10) #National ID
+    NID = models.IntegerField(validators=[MinValueValidator(1000000000, MaxValueValidator(9999999999))],primary_key=True ) #National ID
     phone = models.CharField(validators=[RegexValidator(regex='^.{10}$', message='Please enter a valid number', code='3')], max_length=10,unique=True)
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=15, unique=True)
     is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+
+    password = models.CharField(max_length= 50)
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['fullname', 'NID', 'phone', 'email', 'password', 'is_staff']
+    REQUIRED_FIELDS = ['fullname', 'NID', 'phone', 'email', 'password']
     objects = AccountManager()
 
     

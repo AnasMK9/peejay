@@ -1,5 +1,4 @@
 from django.db import models
-from Auth.models import Account
 import random
 from datetime import date
 from django.core.validators import MinValueValidator, MaxValueValidator,RegexValidator

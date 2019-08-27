@@ -10,11 +10,18 @@ from Auth.models import Account
 from collections import OrderedDict
 import requests
 from datetime import date
+from . import forms
+from django.views.decorators.csrf import csrf_exempt
+
 # Create your views here.
+@csrf_exempt
 def datecalc(x):
     return now() + timedelta(days=x)
 
-def req1F(request, NID,NID2, ltype): #   path('1/<int:NID>/<int:NID2>/<int:ltype>', views.req1F),
+
+@csrf_exempt
+def req1F(request,NID,NID2,ltype): #<int:NID>/<int:NID2>/<int:ltype>
+    
     if (NID2 < 5000000000 and NID2 > 1000000000):
         return JsonResponse({"Error":"الرقم الوطني ليس لقرابة من الدرجة الأولى"})
     elif (NID > 5000000000 and NID < 10000000000) or (NID2 > 5000000000 and NID2 < 10000000000):
@@ -31,7 +38,7 @@ def req1F(request, NID,NID2, ltype): #   path('1/<int:NID>/<int:NID2>/<int:ltype
             return JsonResponse(serializer.data, safe=False)
     else:
         return JsonResponse({"Error":"الرقم الوطني غير صحيح"})
-
+@csrf_exempt
 def req2F(request, NID,lno, deli,addr): #path('2/<int:NID>/<int:lno>/<int:deli>/<slug:addr>', views.req2F)
     if (NID > 1000000000 and NID < 10000000000):
             reqid = ''.join(random.sample(string.ascii_lowercase, 10))
@@ -49,7 +56,7 @@ def req2F(request, NID,lno, deli,addr): #path('2/<int:NID>/<int:lno>/<int:deli>/
             serializer = serializers.req2Serializer(final, many=True)
             return JsonResponse(serializer.data, safe=False)
 
-
+@csrf_exempt
 def req3F(request, NID,lno, deli,addr): #path('3/<int:NID>/<int:lno>/<int:deli>/<slug:addr>', views.req3F)
     if (NID > 1000000000 and NID < 10000000000):
             reqid = ''.join(random.sample(string.ascii_lowercase, 10))
@@ -67,7 +74,7 @@ def req3F(request, NID,lno, deli,addr): #path('3/<int:NID>/<int:lno>/<int:deli>/
             serializer = serializers.req3Serializer(final, many=True)
             return JsonResponse(serializer.data, safe=False)
 
-
+@csrf_exempt
 def req4F(request, NID,lno, deli,addr): #path('3/<int:NID>/<int:lno>/<int:deli>/<slug:addr>', views.req3F)
     if (NID > 1000000000 and NID < 10000000000):
             reqid = ''.join(random.sample(string.ascii_lowercase, 10))
@@ -84,7 +91,7 @@ def req4F(request, NID,lno, deli,addr): #path('3/<int:NID>/<int:lno>/<int:deli>/
             final = req4.objects.all().filter(req_id = reqid)
             serializer = serializers.req4Serializer(final, many=True)
             return JsonResponse(serializer.data, safe=False)
-
+@csrf_exempt
 def req5F(request, NID,tarmeez, Num, regNo, deli, addr): #path('3/<int:NID>/<int:lno>/<int:deli>/<slug:addr>', views.req3F)
     reqid = ''.join(random.sample(string.ascii_lowercase, 10))
     newReq1 = allReqs(NID = NID, paid = False, complete = False, req_id = reqid, price = 13, active = True,reqtype=5,expDate= datecalc(2))
@@ -101,7 +108,7 @@ def req5F(request, NID,tarmeez, Num, regNo, deli, addr): #path('3/<int:NID>/<int
     serializer = serializers.req5Serializer(final, many=True)
     return JsonResponse(serializer.data, safe=False)
 
-
+@csrf_exempt
 def req6F(request, NID,tarmeez, Num, regNo, deli, addr): #path('3/<int:NID>/<int:lno>/<int:deli>/<slug:addr>', views.req3F)
     reqid = ''.join(random.sample(string.ascii_lowercase, 10))
     newReq1 = allReqs(NID = NID, paid = False, complete = False, req_id = reqid, price = 8, active = True,reqtype=6,expDate= datecalc(2))
@@ -118,7 +125,7 @@ def req6F(request, NID,tarmeez, Num, regNo, deli, addr): #path('3/<int:NID>/<int
     serializer = serializers.req6Serializer(final, many=True)
     return JsonResponse(serializer.data, safe=False)
 
-
+@csrf_exempt
 def req7F(request, NID,tarmeez, Num, regNo, deli, addr): #path('3/<int:NID>/<int:lno>/<int:deli>/<slug:addr>', views.req3F)
     reqid = ''.join(random.sample(string.ascii_lowercase, 10))
     newReq1 = allReqs(NID = NID, paid = False, complete = False, req_id = reqid, price = 25, active = True,reqtype=7,expDate= datecalc(2))
@@ -134,7 +141,7 @@ def req7F(request, NID,tarmeez, Num, regNo, deli, addr): #path('3/<int:NID>/<int
     final = req7.objects.all().filter(req_id = reqid)
     serializer = serializers.req7Serializer(final, many=True)
     return JsonResponse(serializer.data, safe=False)
-
+@csrf_exempt
 def req11F(request,NID,NID2, phone,tarmeez, Num, regNo):
     reqid = ''.join(random.sample(string.ascii_lowercase, 10))
     if tarmeez < 10:
@@ -180,6 +187,7 @@ def req11F(request,NID,NID2, phone,tarmeez, Num, regNo):
     pickup_dict["pickup"]=pickup_records
     return JsonResponse(pickup_dict)
 '''
+@csrf_exempt
 def getAll(request, NID):
     res = []
     res.append(serializers.req1Serializer(req1.objects.filter(NID = NID),many=True).data)
@@ -192,7 +200,7 @@ def getAll(request, NID):
     res.append(serializers.req11Serializer(req11.objects.filter(NID = NID),many=True).data)
 
     return JsonResponse(res, safe = False)
-
+@csrf_exempt
 def payAll(request, NID):
     allReqs.objects.filter(NID=NID).update(paid = True)
     req1.objects.filter(NID = NID).update(paid = True)
@@ -205,7 +213,7 @@ def payAll(request, NID):
     req11.objects.filter(NID = NID).update(paid = True)
 
     return JsonResponse({"Message" : "Success"})
-
+@csrf_exempt
 def payone(request, ID):
     allReqs.objects.filter(req_id= ID).update(paid = True)
 

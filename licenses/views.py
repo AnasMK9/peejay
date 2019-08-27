@@ -4,9 +4,10 @@ from datetime import date
 import random
 from licenses.serializers import driverSerializer, carSerializer
 import requests
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
-
+@csrf_exempt
 def getCar(request, tarmeez, carNo, regNo):
     #carr = car.objects.filter(reg_no=regNo, tarmeez=tarmeez, Num=carNo).values_list()
     if tarmeez > 20 or carNo > 99999 or regNo > 9999999999:
@@ -48,7 +49,7 @@ def getCar(request, tarmeez, carNo, regNo):
         else:
             return JsonResponse({"error": "Car doesn't Exist"})
 
-
+@csrf_exempt
 def getDriver(request,NID):
     if NID > 9999999999 or NID < 1000000000:
         return JsonResponse({"error": "Please enter a valid National ID"})
@@ -79,3 +80,4 @@ def getDriver(request,NID):
     dr = driver.objects.all().filter(NID=NID)
     serializer = driverSerializer(dr, many=True)
     return JsonResponse(serializer.data, safe=False)
+    '''

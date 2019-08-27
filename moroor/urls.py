@@ -18,9 +18,13 @@ from django.contrib import admin
 from Auth import views
 from licenses import urls
 urlpatterns = [
+    
     url(r'^admin/', admin.site.urls),
     url(r'^Auth/signup', views.signup),
+    url(r'^Auth/login', views.loginP),
     url(r'^licenses/', include('licenses.urls') ),
-    url(r'^req/', include('req.urls'))
+    url(r'^req/', include('req.urls')),
+    url(r'^', views.home),
+
 ]
 

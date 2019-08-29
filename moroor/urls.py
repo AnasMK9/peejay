@@ -24,7 +24,6 @@ urlpatterns = [
     url(r'^Auth/signup', views.signup),
     url(r'^Auth/login', views.loginP),
     url(r'^licenses/', include('licenses.urls') ),
-    url(r'^req/', include('req.urls')),
     #url(r'^', views.home),
 
 ]

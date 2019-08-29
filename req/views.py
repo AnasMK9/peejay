@@ -55,7 +55,7 @@ def req2F(request): #path('2/<int:NID>/<int:lno>/<int:deli>/<slug:addr>', views.
         addr = form.cleaned_data.get('addr')
     else: 
         return JsonResponse({'Message': 'please enter valid information'})
-    if req2.objects.filter(NID = NID, lNo = lno).count > 0:
+    if req2.objects.filter(NID = NID, lNo = lno).count() > 0:
         return JsonResponse({'Message': 'المعاملة مكررة'})
 
     if (NID > 1000000000 and NID < 10000000000):
@@ -84,7 +84,7 @@ def req3F(request): #path('3/<int:NID>/<int:lno>/<int:deli>/<slug:addr>', views.
         addr = form.cleaned_data.get('addr')
     else: 
         return JsonResponse({'Message': 'please enter valid information'})
-    if req3.objects.filter(NID = NID, lNo = lno).count > 0:
+    if req3.objects.filter(NID = NID, lNo = lno).count() > 0:
         return JsonResponse({'Message': 'المعاملة مكررة'})
     if (NID > 1000000000 and NID < 10000000000):
             reqid = ''.join(random.sample(string.ascii_lowercase, 10))
@@ -112,7 +112,7 @@ def req4F(request): #path('3/<int:NID>/<int:lno>/<int:deli>/<slug:addr>', views.
         addr = form.cleaned_data.get('addr')
     else: 
         return JsonResponse({'Message': 'please enter valid information'})
-    if req4.objects.filter(NID = NID, lNo = lno).count > 0:
+    if req4.objects.filter(NID = NID, lNo = lno).count() > 0:
         return JsonResponse({'Message': 'المعاملة مكررة'})
     if (NID > 1000000000 and NID < 10000000000):
             reqid = ''.join(random.sample(string.ascii_lowercase, 10))
@@ -141,7 +141,7 @@ def req5F(request): #path('3/<int:NID>/<int:lno>/<int:deli>/<slug:addr>', views.
         addr = form.cleaned_data.get('addr')
     else:
         return JsonResponse({'Message': 'please enter valid information'})        
-    if req5.objects.filter(NID = NID, tarmeez = tarmeez, carNo = Num).count > 0:
+    if req5.objects.filter(NID = NID, tarmeez = tarmeez, carNo = Num).count() > 0:
         return JsonResponse({'Message': 'المعاملة مكررة'})
     reqid = ''.join(random.sample(string.ascii_lowercase, 10))
     newReq1 = allReqs(NID = NID, paid = False, complete = False, req_id = reqid, price = 13, active = True,reqtype=5,expDate= datecalc(2))
@@ -170,7 +170,7 @@ def req6F(request): #path('3/<int:NID>/<int:lno>/<int:deli>/<slug:addr>', views.
         addr = form.cleaned_data.get('addr')
     else:
         return JsonResponse({'Message': 'please enter valid information'})        
-    if req6.objects.filter(NID = NID, tarmeez = tarmeez, carNo = Num).count > 0:
+    if req6.objects.filter(NID = NID, tarmeez = tarmeez, carNo = Num).count() > 0:
         return JsonResponse({'Message': 'المعاملة مكررة'})
     reqid = ''.join(random.sample(string.ascii_lowercase, 10))
     newReq1 = allReqs(NID = NID, paid = False, complete = False, req_id = reqid, price = 8, active = True,reqtype=6,expDate= datecalc(2))
@@ -199,7 +199,7 @@ def req7F(request): #path('3/<int:NID>/<int:lno>/<int:deli>/<slug:addr>', views.
         addr = form.cleaned_data.get('addr')
     else:
         return JsonResponse({'Message': 'please enter valid information'})     
-    if req7.objects.filter(NID = NID, tarmeez = tarmeez, carNo = Num).count > 0:
+    if req7.objects.filter(NID = NID, tarmeez = tarmeez, carNo = Num).count() > 0:
         return JsonResponse({'Message': 'المعاملة مكررة'})
     reqid = ''.join(random.sample(string.ascii_lowercase, 10))
     newReq1 = allReqs(NID = NID, paid = False, complete = False, req_id = reqid, price = 25, active = True,reqtype=7,expDate= datecalc(2))
@@ -227,7 +227,7 @@ def req11F(request):
         phone = form.cleaned_data.get('phone')
     else:
         return JsonResponse({'Message': 'please enter valid information'})     
-    if req11.objects.filter(NID = NID, NID2=NID2 , tarmeez = tarmeez, carNo = Num).count > 0:
+    if req11.objects.filter(NID = NID, NID2=NID2 , tarmeez = tarmeez, carNo = Num).count() > 0:
         return JsonResponse({'Message': 'المعاملة مكررة'})
     reqid = ''.join(random.sample(string.ascii_lowercase, 10))
     if tarmeez < 10:

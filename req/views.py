@@ -321,8 +321,8 @@ def payone(request):
 
     allReqs.objects.filter(req_id= ID).update(paid = True)
 
-    allReqs.objects.filter(req_id= ID).update(paid = True)
-    req1.objects.filter(req_id= ID).update(paid = True)
+    
+    req1.objects.filter(req_id= ID).update(paid = True) 
     req2.objects.filter(req_id= ID).update(paid = True)
     req3.objects.filter(req_id= ID).update(paid = True)
     req4.objects.filter(req_id= ID).update(paid = True)

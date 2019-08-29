@@ -159,7 +159,7 @@ def req5F(request): #path('3/<int:NID>/<int:lno>/<int:deli>/<slug:addr>', views.
     return JsonResponse(serializer.data, safe=False)
 
 @csrf_exempt
-def req6F(request, NID,tarmeez, Num, regNo, deli, addr): #path('3/<int:NID>/<int:lno>/<int:deli>/<slug:addr>', views.req3F)
+def req6F(request): #path('3/<int:NID>/<int:lno>/<int:deli>/<slug:addr>', views.req3F)
     form = forms.req5f(request.POST)
     if form.is_valid():
         NID = form.cleaned_data.get('NID')
@@ -188,7 +188,7 @@ def req6F(request, NID,tarmeez, Num, regNo, deli, addr): #path('3/<int:NID>/<int
     return JsonResponse(serializer.data, safe=False)
 
 @csrf_exempt
-def req7F(request, NID,tarmeez, Num, regNo, deli, addr): #path('3/<int:NID>/<int:lno>/<int:deli>/<slug:addr>', views.req3F)
+def req7F(request): #path('3/<int:NID>/<int:lno>/<int:deli>/<slug:addr>', views.req3F)
     form = forms.req5f(request.POST)
     if form.is_valid():
         NID = form.cleaned_data.get('NID')
@@ -216,7 +216,7 @@ def req7F(request, NID,tarmeez, Num, regNo, deli, addr): #path('3/<int:NID>/<int
     serializer = serializers.req7Serializer(final, many=True)
     return JsonResponse(serializer.data, safe=False)
 @csrf_exempt
-def req11F(request,NID,NID2, phone,tarmeez, Num, regNo):
+def req11F(request):
     form = forms.req11f(request.POST)
     if form.is_valid():
         NID =  form.cleaned_data.get('NID')
@@ -314,7 +314,7 @@ def payAll(request):
 
     return JsonResponse({"Message" : "Success"})
 @csrf_exempt
-def payone(request, ID):
+def payone(request):
     form = forms.payonef(request.POST)
     if form.is_valid():
         ID = form.cleaned_data.get('reqid')

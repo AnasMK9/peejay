@@ -274,7 +274,7 @@ def req11F(request):
     return JsonResponse(pickup_dict)
 '''
 @csrf_exempt
-def getAll(request, NID:
+def getAll(request, NID):
     res = []
     if req1.objects.filter(NID = NID).count() > 0:
         res.append(serializers.req1Serializer(req1.objects.filter(NID = NID),many=True).data)

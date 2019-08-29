@@ -33,3 +33,10 @@ class req11f(forms.Form):#int:NID>/<int:NID2>/<slug:phone>/<int:tarmeez>/<int:Nu
     Num = forms.IntegerField(required=True)
     regNo = forms.IntegerField(required=True)
     phone = forms.CharField(required = True)
+
+
+class payallf(forms.Form):
+    NID =  forms.IntegerField(required=True)
+
+class payonef(forms.Form):
+    reqid = forms.CharField(required = True)

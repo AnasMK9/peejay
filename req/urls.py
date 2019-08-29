@@ -11,8 +11,8 @@ urlpatterns = [
    path('7', views.req7F), #NID,tarmeez, Num, regNo, deli, addr
    path('11', views.req11F), #NID,tarmeez, Num, regNo, deli, addr
    path('getAll/<int:NID>', views.getAll),
-   path('payAll/<int:NID>', views.payAll),
-   path('payone/<slug:ID>', views.payone),
+   path('payAll', views.payAll),
+   path('payone', views.payone),
 
 
 ]

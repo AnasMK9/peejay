@@ -30,12 +30,10 @@ def signup(request):
         form = xform()
         args = {'form' : form}
         return render(request, 'reg.html', args)
-    '''
 @csrf_exempt
 def home(request):
     return HttpResponse("Nothing to see for humans here")
 
-'''
 @csrf_exempt
 def loginP(request):
     if request.method=="GET":

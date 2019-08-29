@@ -27,7 +27,7 @@ def req1F(request): #<int:NID>/<int:NID2>/<int:ltype>
         NID2 = form.cleaned_data.get('NID2')
         ltype = form.cleaned_data.get('ltype')
     else:
-        return JsonResponse(form.errors, safe=False)
+        return JsonResponse({'Message': 'please enter valid information'})
 
     if (NID2 < 5000000000 and NID2 > 1000000000):
         return JsonResponse({"Error":"الرقم الوطني ليس لقرابة من الدرجة الأولى"})
@@ -46,7 +46,17 @@ def req1F(request): #<int:NID>/<int:NID2>/<int:ltype>
     else:
         return JsonResponse({"Error":"الرقم الوطني غير صحيح"})
 @csrf_exempt
-def req2F(request, NID,lno, deli,addr): #path('2/<int:NID>/<int:lno>/<int:deli>/<slug:addr>', views.req2F)
+def req2F(request): #path('2/<int:NID>/<int:lno>/<int:deli>/<slug:addr>', views.req2F)
+    form = forms.req2f(request.POST)
+    if form.is_valid():
+        NID = form.cleaned_data.get('NID')
+        lno = form.cleaned_data.get('lno')
+        deli = form.cleaned_data.get('deli')
+        addr = form.cleaned_data.get('addr')
+    else: 
+        return JsonResponse({'Message': 'please enter valid information'})
+
+
     if (NID > 1000000000 and NID < 10000000000):
             reqid = ''.join(random.sample(string.ascii_lowercase, 10))
             newReq1 = allReqs(NID = NID, paid = False, complete = False, req_id = reqid, price = 12, active = True,reqtype=2,expDate= datecalc(1))
@@ -64,7 +74,15 @@ def req2F(request, NID,lno, deli,addr): #path('2/<int:NID>/<int:lno>/<int:deli>/
             return JsonResponse(serializer.data, safe=False)
 
 @csrf_exempt
-def req3F(request, NID,lno, deli,addr): #path('3/<int:NID>/<int:lno>/<int:deli>/<slug:addr>', views.req3F)
+def req3F(request): #path('3/<int:NID>/<int:lno>/<int:deli>/<slug:addr>', views.req3F)
+    form = forms.req2f(request.POST)
+    if form.is_valid():
+        NID = form.cleaned_data.get('NID')
+        lno = form.cleaned_data.get('lno')
+        deli = form.cleaned_data.get('deli')
+        addr = form.cleaned_data.get('addr')
+    else: 
+        return JsonResponse({'Message': 'please enter valid information'})
     if (NID > 1000000000 and NID < 10000000000):
             reqid = ''.join(random.sample(string.ascii_lowercase, 10))
             newReq1 = allReqs(NID = NID, paid = False, complete = False, req_id = reqid, price = 8, active = True,reqtype=3,expDate= datecalc(2))
@@ -82,7 +100,15 @@ def req3F(request, NID,lno, deli,addr): #path('3/<int:NID>/<int:lno>/<int:deli>/
             return JsonResponse(serializer.data, safe=False)
 
 @csrf_exempt
-def req4F(request, NID,lno, deli,addr): #path('3/<int:NID>/<int:lno>/<int:deli>/<slug:addr>', views.req3F)
+def req4F(request): #path('3/<int:NID>/<int:lno>/<int:deli>/<slug:addr>', views.req3F)
+    form = forms.req2f(request.POST)
+    if form.is_valid():
+        NID = form.cleaned_data.get('NID')
+        lno = form.cleaned_data.get('lno')
+        deli = form.cleaned_data.get('deli')
+        addr = form.cleaned_data.get('addr')
+    else: 
+        return JsonResponse({'Message': 'please enter valid information'})
     if (NID > 1000000000 and NID < 10000000000):
             reqid = ''.join(random.sample(string.ascii_lowercase, 10))
             newReq1 = allReqs(NID = NID, paid = False, complete = False, req_id = reqid, price = 32, active = True,reqtype=4,expDate= datecalc(2))
@@ -99,7 +125,18 @@ def req4F(request, NID,lno, deli,addr): #path('3/<int:NID>/<int:lno>/<int:deli>/
             serializer = serializers.req4Serializer(final, many=True)
             return JsonResponse(serializer.data, safe=False)
 @csrf_exempt
-def req5F(request, NID,tarmeez, Num, regNo, deli, addr): #path('3/<int:NID>/<int:lno>/<int:deli>/<slug:addr>', views.req3F)
+def req5F(request): #path('3/<int:NID>/<int:lno>/<int:deli>/<slug:addr>', views.req3F)
+    form = forms.req5f(request.POST)
+    if form.is_valid():
+        NID = form.cleaned_data.get('NID')
+        tarmeez = form.cleaned_data.get('tarmeez')
+        Num = form.cleaned_data.get('Num')
+        regNo = form.cleaned_data.get('regNo')
+        deli = form.cleaned_data.get('deli')
+        addr = form.cleaned_data.get('addr')
+    else:
+        return JsonResponse({'Message': 'please enter valid information'})        
+
     reqid = ''.join(random.sample(string.ascii_lowercase, 10))
     newReq1 = allReqs(NID = NID, paid = False, complete = False, req_id = reqid, price = 13, active = True,reqtype=5,expDate= datecalc(2))
     newReq2 = req5(NID = NID, paid = False, complete = False, req_id = reqid, price = 13, tarmeez = tarmeez, carNo=Num, regNo=regNo, expDate= datecalc(2), active = True ,reqtype=5) 
@@ -117,6 +154,17 @@ def req5F(request, NID,tarmeez, Num, regNo, deli, addr): #path('3/<int:NID>/<int
 
 @csrf_exempt
 def req6F(request, NID,tarmeez, Num, regNo, deli, addr): #path('3/<int:NID>/<int:lno>/<int:deli>/<slug:addr>', views.req3F)
+    form = forms.req5f(request.POST)
+    if form.is_valid():
+        NID = form.cleaned_data.get('NID')
+        tarmeez = form.cleaned_data.get('tarmeez')
+        Num = form.cleaned_data.get('Num')
+        regNo = form.cleaned_data.get('regNo')
+        deli = form.cleaned_data.get('deli')
+        addr = form.cleaned_data.get('addr')
+    else:
+        return JsonResponse({'Message': 'please enter valid information'})        
+
     reqid = ''.join(random.sample(string.ascii_lowercase, 10))
     newReq1 = allReqs(NID = NID, paid = False, complete = False, req_id = reqid, price = 8, active = True,reqtype=6,expDate= datecalc(2))
     newReq2 = req6(NID = NID, paid = False, complete = False, req_id = reqid, price = 8, tarmeez = tarmeez, carNo=Num, regNo=regNo, expDate= datecalc(2), active = True ,reqtype=6) 
@@ -134,6 +182,17 @@ def req6F(request, NID,tarmeez, Num, regNo, deli, addr): #path('3/<int:NID>/<int
 
 @csrf_exempt
 def req7F(request, NID,tarmeez, Num, regNo, deli, addr): #path('3/<int:NID>/<int:lno>/<int:deli>/<slug:addr>', views.req3F)
+    form = forms.req5f(request.POST)
+    if form.is_valid():
+        NID = form.cleaned_data.get('NID')
+        tarmeez = form.cleaned_data.get('tarmeez')
+        Num = form.cleaned_data.get('Num')
+        regNo = form.cleaned_data.get('regNo')
+        deli = form.cleaned_data.get('deli')
+        addr = form.cleaned_data.get('addr')
+    else:
+        return JsonResponse({'Message': 'please enter valid information'})     
+
     reqid = ''.join(random.sample(string.ascii_lowercase, 10))
     newReq1 = allReqs(NID = NID, paid = False, complete = False, req_id = reqid, price = 25, active = True,reqtype=7,expDate= datecalc(2))
     newReq2 = req7(NID = NID, paid = False, complete = False, req_id = reqid, price = 25, tarmeez = tarmeez, carNo=Num, regNo=regNo, expDate= datecalc(2), active = True ,reqtype=7) 
@@ -150,6 +209,17 @@ def req7F(request, NID,tarmeez, Num, regNo, deli, addr): #path('3/<int:NID>/<int
     return JsonResponse(serializer.data, safe=False)
 @csrf_exempt
 def req11F(request,NID,NID2, phone,tarmeez, Num, regNo):
+    form = forms.req11f(request.POST)
+    if form.is_valid():
+        NID =  form.cleaned_data.get('NID')
+        NID2 = form.cleaned_data.get('NID2')
+        tarmeez = form.cleaned_data.get('tarmeez')
+        Num = form.cleaned_data.get('Num')
+        regNo = form.cleaned_data.get('regNo')
+        phone = form.cleaned_data.get('phone')
+    else:
+        return JsonResponse({'Message': 'please enter valid information'})     
+
     reqid = ''.join(random.sample(string.ascii_lowercase, 10))
     if tarmeez < 10:
         return JsonResponse({"Error":"Car not found"})

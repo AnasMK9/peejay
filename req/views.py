@@ -27,7 +27,7 @@ def req1F(request): #<int:NID>/<int:NID2>/<int:ltype>
         NID2 = form.cleaned_data.get('NID2')
         ltype = form.cleaned_data.get('ltype')
     else:
-        return JsonResponse(form.data, safe=False)
+        return JsonResponse(form.errors, safe=False)
 
     if (NID2 < 5000000000 and NID2 > 1000000000):
         return JsonResponse({"Error":"الرقم الوطني ليس لقرابة من الدرجة الأولى"})

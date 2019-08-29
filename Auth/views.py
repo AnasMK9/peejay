@@ -24,7 +24,7 @@ def signup(request):
             user = authenticate(username=username, password=raw_password)
             return JsonResponse({'NID':user.NID, 'lno': driver.objects.get(NID = user.NID).licenseNo, 'fullname': fullname})
         else:
-            return JsonResponse({'Message':'F'})
+            return JsonResponse({'Message':'Something wrong happened'})
         
     else:
         form = xform()

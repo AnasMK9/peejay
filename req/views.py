@@ -20,8 +20,15 @@ def datecalc(x):
 
 
 @csrf_exempt
-def req1F(request,NID,NID2,ltype): #<int:NID>/<int:NID2>/<int:ltype>
-    
+def req1F(request): #<int:NID>/<int:NID2>/<int:ltype>
+    form = forms.req1f(request.POST)
+    if form.is_valid():
+        NID = form.cleaned_data.get('NID')
+        NID2 = form.cleaned_data.get('NID2')
+        ltype = form.cleaned_data.get('ltype')
+    else:
+        return JsonResponse(form.data, safe=False)
+
     if (NID2 < 5000000000 and NID2 > 1000000000):
         return JsonResponse({"Error":"الرقم الوطني ليس لقرابة من الدرجة الأولى"})
     elif (NID > 5000000000 and NID < 10000000000) or (NID2 > 5000000000 and NID2 < 10000000000):
